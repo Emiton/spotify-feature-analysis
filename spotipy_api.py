@@ -142,15 +142,16 @@ def get_playlist_audio_features(uri):
 
             # extract features
             features = sp.audio_features(track_uri)
-            all_playlists[playlist_name]['acousticness'].append(features[0]['acousticness'])
-            all_playlists[playlist_name]['danceability'].append(features[0]['danceability'])
-            all_playlists[playlist_name]['energy'].append(features[0]['energy'])
-            all_playlists[playlist_name]['instrumentalness'].append(features[0]['instrumentalness'])
-            all_playlists[playlist_name]['liveness'].append(features[0]['liveness'])
-            all_playlists[playlist_name]['loudness'].append(features[0]['loudness'])
-            all_playlists[playlist_name]['speechiness'].append(features[0]['speechiness'])
-            all_playlists[playlist_name]['tempo'].append(features[0]['tempo'])
-            all_playlists[playlist_name]['valence'].append(features[0]['valence'])
+            if features != [None]:
+                all_playlists[playlist_name]['acousticness'].append(features[0]['acousticness'])
+                all_playlists[playlist_name]['danceability'].append(features[0]['danceability'])
+                all_playlists[playlist_name]['energy'].append(features[0]['energy'])
+                all_playlists[playlist_name]['instrumentalness'].append(features[0]['instrumentalness'])
+                all_playlists[playlist_name]['liveness'].append(features[0]['liveness'])
+                all_playlists[playlist_name]['loudness'].append(features[0]['loudness'])
+                all_playlists[playlist_name]['speechiness'].append(features[0]['speechiness'])
+                all_playlists[playlist_name]['tempo'].append(features[0]['tempo'])
+                all_playlists[playlist_name]['valence'].append(features[0]['valence'])
 
     return results
 
