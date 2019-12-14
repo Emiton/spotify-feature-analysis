@@ -106,12 +106,12 @@ def main():
             ('Housewerk', 'spotify:playlist:37i9dQZF1DXa8NOEUWPn9W'),
             ('Dance Party', 'spotify:playlist:37i9dQZF1DXaXB8fQg7xif'),
             ('Dance Hits', 'spotify:playlist:37i9dQZF1DX0BcQWzuB7ZO'),
-            (),
-            (),
-            (),
-            (),
-            (),
-            (),
+            ('Night Rider', 'spotify:playlist:37i9dQZF1DX6GJXiuZRisr'),
+            ('Rage Beats', 'spotify:playlist:37i9dQZF1DX3ND264N08pv'),
+            ('Techno Bunker', 'spotify:playlist:37i9dQZF1DX6J5NfMJS675'),
+            ('Shuffle Syndrome', 'spotify:playlist:37i9dQZF1DWUq3wF0JVtEy'),
+            ('Trance Mission', 'spotify:playlist:37i9dQZF1DX91oIci4su1D'),
+            ('Main Stage', 'spotify:playlist:37i9dQZF1DX7ZUug1ANKRP'),
 
         ],
     }
