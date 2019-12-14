@@ -121,8 +121,12 @@ def main():
         'spotify:playlist:37i9dQZF1DX9OZisIoJQhG',
     ]
 
-    for plist in playlists_to_analyze:
-        get_playlist_audio_features(plist)
+    # for plist in playlists_to_analyze:
+    #     get_playlist_audio_features(plist)
+
+    for genre in plists_to_work_with:
+        for playlist in plists_to_work_with[genre]:
+            get_playlist_audio_features(playlist[0], playlist[1], genre)
 
     # visualize_playlist_data(all_playlists['RapCaviar'])
 
@@ -201,7 +205,7 @@ def main():
     plt.show()
 
 
-def get_playlist_audio_features(uri):
+def get_playlist_audio_features(playlist, uri, genre):
     playlist_id = uri.split(':')[2]
 
     results = sp.user_playlist(user=username, playlist_id=playlist_id)
@@ -209,6 +213,8 @@ def get_playlist_audio_features(uri):
     playlist_name = results['name']
     all_playlists[playlist_name] = {}
     all_playlists[playlist_name]['name'] = []
+    all_playlists[playlist_name]['genre'] = []
+    all_playlists[playlist_name]['playlist'] = []
     all_playlists[playlist_name]['track uri'] = []
     all_playlists[playlist_name]['acousticness'] = []
     all_playlists[playlist_name]['danceability'] = []
@@ -231,6 +237,8 @@ def get_playlist_audio_features(uri):
             print(name)
             track_uri = track_metadata['track']['uri']
             all_playlists[playlist_name]['name'].append(name)
+            all_playlists[playlist_name]['genre'].append(genre)
+            all_playlists[playlist_name]['playlist'].append(playlist)
             all_playlists[playlist_name]['track uri'].append(track_uri)
 
             # extract features
