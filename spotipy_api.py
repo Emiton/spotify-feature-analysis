@@ -5,7 +5,7 @@ import os
 import pandas as pd
 import seaborn as sns
 import spotipy
-from spotipy.oauth2 import SpotifyClientCredentials # For Spotify API use
+from spotipy.oauth2 import SpotifyClientCredentials  # For Spotify API use
 
 username = 'Emiton Alves'
 client_id = os.environ['SPOTIFY_CLIENT_ID']
@@ -22,6 +22,112 @@ sp = spotipy.Spotify(client_credentials_manager=client_credentials_manager)
 
 
 def main():
+
+    plists_to_work_with = {
+        'Hip-Hop': [
+            ('RapCaviar', 'spotify:playlist:37i9dQZF1DX0XUsuxWHRQd'),
+            ('Get Turnt', 'spotify:playlist:37i9dQZF1DWY4xHQp97fN6'),
+            ('Feelin\' Myself', 'spotify:playlist:37i9dQZF1DX6GwdWRQMQpq'),
+            ('Most Necessary', 'spotify:playlist:37i9dQZF1DX2RxBh64BHjQ'),
+            ('I Love My \'90s Hip-Hop', 'spotify:playlist:37i9dQZF1DX186v583rmzp'),
+            ('Signed XOXO', 'spotify:playlist:37i9dQZF1DX2A29LI7xHn1'),
+            ('Gold School', 'spotify:playlist:37i9dQZF1DWVA1Gq4XHa6U'),
+            ('If It Wasn\'t For Gucci', 'spotify:playlist:37i9dQZF1DXcWxeqLvgOCi'),
+            ('Grime Shutdown', 'spotify:playlist:37i9dQZF1DWSOkubnsDCSS'),
+            ('This Is A$AP Mob', 'spotify:playlist:37i9dQZF1DWXmxXDRgAKVq'),
+        ],
+        'country': [
+            (),
+            (),
+            (),
+            (),
+            (),
+            (),
+            (),
+            (),
+            (),
+            (),
+
+        ],
+        'pop': [
+            (),
+            (),
+            (),
+            (),
+            (),
+            (),
+            (),
+            (),
+            (),
+            (),
+
+        ],
+        'rock': [
+            (),
+            (),
+            (),
+            (),
+            (),
+            (),
+            (),
+            (),
+            (),
+            (),
+
+        ],
+        'r&b': [
+            (),
+            (),
+            (),
+            (),
+            (),
+            (),
+            (),
+            (),
+            (),
+            (),
+
+        ],
+        'afrobeat': [
+            (),
+            (),
+            (),
+            (),
+            (),
+            (),
+            (),
+            (),
+            (),
+            (),
+
+        ],
+        'classical': [
+            (),
+            (),
+            (),
+            (),
+            (),
+            (),
+            (),
+            (),
+            (),
+            (),
+
+        ],
+        'electronic': [
+            (),
+            (),
+            (),
+            (),
+            (),
+            (),
+            (),
+            (),
+            (),
+            (),
+
+        ],
+    }
     playlists_to_analyze = [
         'spotify:playlist:37i9dQZF1DX0XUsuxWHRQd',
         'spotify:playlist:37i9dQZF1DX1lVhptIYRda',
