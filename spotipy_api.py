@@ -6,6 +6,7 @@ import pandas as pd
 import seaborn as sns
 import spotipy
 from spotipy.oauth2 import SpotifyClientCredentials  # For Spotify API use
+import sqlite3
 
 username = 'Emiton Alves'
 client_id = os.environ['SPOTIFY_CLIENT_ID']
@@ -20,6 +21,30 @@ all_playlists = {}
 # redirect_uri = 'http://localhost/5000'
 sp = spotipy.Spotify(client_credentials_manager=client_credentials_manager)
 
+# connection = sqlite3.connect('spotify_analysis_db')
+# cursor = connection.cursor()
+# query_string = (
+#     "CREATE TABLE spotify_songs ("
+#     "track_uri TEXT NOT NULL, "
+#     "name TEXT, "
+#     "genre TEXT, "
+#     "playlist TEXT, "
+#     "duration_ms INTEGER, "
+#     "key INTEGER, "
+#     "mode INTEGER, "
+#     "time_signature INTEGER, "
+#     "acousticness REAL, "
+#     "danceability REAL, "
+#     "energy REAL, "
+#     "instrumentalness REAL, "
+#     "liveness REAL, "
+#     "loudness REAL, "
+#     "speechiness REAL, "
+#     "tempo REAL, "
+#     "valence REAL, "
+#     " PRIMARY KEY (track_uri))"
+# )
+# cursor.execute('CREATE TABLE')
 
 def main():
 
@@ -124,7 +149,11 @@ def main():
     # for plist in playlists_to_analyze:
     #     get_playlist_audio_features(plist)
 
-    for genre in plists_to_work_with:
+    data = None  # TODO: Better way than declaring prior to use?
+    with open('playlists_to_work_with.json') as json_file:
+        data = json.load(json_file)
+
+    for genre in data:
         for playlist in plists_to_work_with[genre]:
             get_playlist_audio_features(playlist[0], playlist[1], genre)
 
@@ -212,10 +241,14 @@ def get_playlist_audio_features(playlist, uri, genre):
 
     playlist_name = results['name']
     all_playlists[playlist_name] = {}
+    all_playlists[playlist_name]['track uri'] = []
     all_playlists[playlist_name]['name'] = []
     all_playlists[playlist_name]['genre'] = []
     all_playlists[playlist_name]['playlist'] = []
-    all_playlists[playlist_name]['track uri'] = []
+    all_playlists[playlist_name]['duration_ms'] = []
+    all_playlists[playlist_name]['key'] = []
+    all_playlists[playlist_name]['mode'] = []
+    all_playlists[playlist_name]['time_signature'] = []
     all_playlists[playlist_name]['acousticness'] = []
     all_playlists[playlist_name]['danceability'] = []
     all_playlists[playlist_name]['energy'] = []
@@ -225,7 +258,6 @@ def get_playlist_audio_features(playlist, uri, genre):
     all_playlists[playlist_name]['speechiness'] = []
     all_playlists[playlist_name]['tempo'] = []
     all_playlists[playlist_name]['valence'] = []
-    all_playlists[playlist_name]['popularity'] = []
 
     for track_metadata in results['tracks']['items']:
         # DEBUG STATEMENT
@@ -236,14 +268,18 @@ def get_playlist_audio_features(playlist, uri, genre):
             name = track_metadata['track']['name']
             print(name)
             track_uri = track_metadata['track']['uri']
+            all_playlists[playlist_name]['track uri'].append(track_uri)
             all_playlists[playlist_name]['name'].append(name)
             all_playlists[playlist_name]['genre'].append(genre)
             all_playlists[playlist_name]['playlist'].append(playlist)
-            all_playlists[playlist_name]['track uri'].append(track_uri)
 
             # extract features
             features = sp.audio_features(track_uri)
             if features != [None]:
+                all_playlists[playlist_name]['duration_ms'].append(features[0]['duration_ms'])
+                all_playlists[playlist_name]['key'].append(features[0]['key'])
+                all_playlists[playlist_name]['mode'].append(features[0]['mode'])
+                all_playlists[playlist_name]['time_signature'].append(features[0]['time_signature'])
                 all_playlists[playlist_name]['acousticness'].append(features[0]['acousticness'])
                 all_playlists[playlist_name]['danceability'].append(features[0]['danceability'])
                 all_playlists[playlist_name]['energy'].append(features[0]['energy'])
