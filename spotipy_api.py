@@ -46,115 +46,13 @@ sp = spotipy.Spotify(client_credentials_manager=client_credentials_manager)
 # )
 # cursor.execute('CREATE TABLE')
 
+
 def main():
-
-    plists_to_work_with = {
-        'Hip-Hop': [
-            ('RapCaviar', 'spotify:playlist:37i9dQZF1DX0XUsuxWHRQd'),
-            ('Get Turnt', 'spotify:playlist:37i9dQZF1DWY4xHQp97fN6'),
-            ('Feelin\' Myself', 'spotify:playlist:37i9dQZF1DX6GwdWRQMQpq'),
-            ('Most Necessary', 'spotify:playlist:37i9dQZF1DX2RxBh64BHjQ'),
-            ('I Love My \'90s Hip-Hop', 'spotify:playlist:37i9dQZF1DX186v583rmzp'),
-            ('Signed XOXO', 'spotify:playlist:37i9dQZF1DX2A29LI7xHn1'),
-            ('Gold School', 'spotify:playlist:37i9dQZF1DWVA1Gq4XHa6U'),
-            ('If It Wasn\'t For Gucci', 'spotify:playlist:37i9dQZF1DXcWxeqLvgOCi'),
-            ('Grime Shutdown', 'spotify:playlist:37i9dQZF1DWSOkubnsDCSS'),
-            ('This Is A$AP Mob', 'spotify:playlist:37i9dQZF1DWXmxXDRgAKVq'),
-        ],
-        'country': [
-            ('Hot Country', 'spotify:playlist:37i9dQZF1DX1lVhptIYRda'),
-            ('Country Kind Of Love', 'spotify:playlist:37i9dQZF1DX8WMG8VPSOJC'),
-            ('Chillin\' on a Dirt Road', 'spotify:playlist:37i9dQZF1DWTkxQvqMy4WW'),
-            ('Country Gold', 'spotify:playlist:37i9dQZF1DWYnwbYQ5HnZU'),
-            ('Wild Country', 'spotify:playlist:37i9dQZF1DX5mB2C8gBeUM'),
-            ('Country by the Grace of God', 'spotify:playlist:37i9dQZF1DWU2LcZVHsTdv'),
-            ('Country Nights', 'spotify:playlist:37i9dQZF1DWXi7h4mmmkzD'),
-            ('Drunk and Hungover', 'spotify:playlist:37i9dQZF1DX3ph0alWhOXm'),
-            ('Country Music 101: Country\'s Greatest Hits','spotify:playlist:37i9dQZF1DWZBCPUIUs2iR'),
-            ('New Boots', 'spotify:playlist:37i9dQZF1DX8S0uQvJ4gaa'),
-
-        ],
-        'pop': [
-            ('Today\'s Top Hits', 'spotify:playlist:37i9dQZF1DXcBWIGoYBM5M'),
-            ('Pop Rising', 'spotify:playlist:37i9dQZF1DWUa8ZRTfalHk'),
-            ('Hit Rewind', 'spotify:playlist:37i9dQZF1DX0s5kDXi1oC5'),
-            ('Everyday Favorites', 'spotify:playlist:37i9dQZF1DX0MLFaUdXnjA'),
-            ('Pop Party', 'spotify:playlist:37i9dQZF1DWXti3N4Wp5xy'),
-            ('Indie Pop', 'spotify:playlist:37i9dQZF1DWWEcRhUVtL8n'),
-            ('Sad Bops', 'spotify:playlist:37i9dQZF1DWZUAeYvs88zc'),
-            ('Women of Pop','spotify:playlist:37i9dQZF1DX3WvGXE8FqYX'),
-            ('Bedroom Pop', 'spotify:playlist:37i9dQZF1DXcxvFzl58uP7'),
-            ('Fresh & Chill', 'spotify:playlist:37i9dQZF1DX5CdVP4rz81C'),
-
-        ],
-        'rock': [
-            ('Rock Classics', 'spotify:playlist:37i9dQZF1DWXRqgorJj26U'),
-            ('90s Rock Anthems', 'spotify:playlist:37i9dQZF1DX1rVvRgjX59F'),
-            ('00s Rock Anthems', 'spotify:playlist:37i9dQZF1DX3oM43CtKnRV'),
-            ('80s Rock Anthems', 'spotify:playlist:37i9dQZF1DX1spT6G94GFC'),
-            ('New Noise', 'spotify:playlist:37i9dQZF1DWT2jS7NwYPVI'),
-            ('Rock This', 'spotify:playlist:37i9dQZF1DXcF6B6QPhFDv'),
-            ('Rock Hard', 'spotify:playlist:37i9dQZF1DWWJOmJ7nRx0C'),
-            ('Pure Rock & Roll', 'spotify:playlist:37i9dQZF1DWWRktbhJiuqL'),
-            ('Rock Party', 'spotify:playlist:37i9dQZF1DX8FwnYE6PRvL'),
-            ('Emo Forever', 'spotify:playlist:37i9dQZF1DX9wa6XirBPv8'),
-
-        ],
-        'r&b': [
-            ('Are & Be', 'spotify:playlist:37i9dQZF1DX4SBhb3fqCJd'),
-            ('I Love My 2000s R&B', 'spotify:playlist:37i9dQZF1DWYmmr74INQlb'),
-            ('Black Girl Magic', 'spotify:playlist:37i9dQZF1DX4ezQVslkJiT'),
-            ('I Love my \'90s R&B', 'spotify:playlist:37i9dQZF1DX6VDO8a6cQME'),
-            ('Chilled R&B', 'spotify:playlist:37i9dQZF1DX2UgsUIg75Vg'),
-            ('\'80s Jam Session', 'spotify:playlist:37i9dQZF1DX0H8hDpv38Ju'),
-            ('The Newness', 'spotify:playlist:37i9dQZF1DWUzFXarNiofw'),
-            ('The Cookout', 'spotify:playlist:37i9dQZF1DXab8DipvnuNU'),
-            ('Fancy Friday', 'spotify:playlist:37i9dQZF1DWUbo613Z2iWO'),
-            ('Queen', 'spotify:playlist:37i9dQZF1DWSIO2QWRavWZ'),
-
-        ],
-        'classical': [
-            ('Classical Essentials', 'spotify:playlist:37i9dQZF1DWWEJlAGA9gs0'),
-            ('Morning Classical', 'spotify:playlist:37i9dQZF1DX9OZisIoJQhG'),
-            ('Chilled Classical', 'spotify:playlist:37i9dQZF1DWUvHZA1zLcjW'),
-            ('Classical Sleep', 'spotify:playlist:37i9dQZF1DX8Sz1gsYZdwj'),
-            ('Easy Classical', 'spotify:playlist:37i9dQZF1DX0Aaer4Jzfgm'),
-            ('Epic Classical', 'spotify:playlist:37i9dQZF1DX9G9wwzwWL2k'),
-            ('Classical Romance', 'spotify:playlist:37i9dQZF1DX4s3V2rTswzO'),
-            ('Orchestra 100: Spotify Picks', 'spotify:playlist:37i9dQZF1DXddGd6mP5X2a'),
-            ('Piano 100: Spotify Picks', 'spotify:playlist:37i9dQZF1DXah8e1pvF5oE'),
-            ('Baroque 50: Spotify Picks', 'spotify:playlist:37i9dQZF1DWXjj6kdiviS0'),
-
-        ],
-        'electronic': [
-            ('mint', 'spotify:playlist:37i9dQZF1DX4dyzvuaRJ0n'),
-            ('Housewerk', 'spotify:playlist:37i9dQZF1DXa8NOEUWPn9W'),
-            ('Dance Party', 'spotify:playlist:37i9dQZF1DXaXB8fQg7xif'),
-            ('Dance Hits', 'spotify:playlist:37i9dQZF1DX0BcQWzuB7ZO'),
-            ('Night Rider', 'spotify:playlist:37i9dQZF1DX6GJXiuZRisr'),
-            ('Rage Beats', 'spotify:playlist:37i9dQZF1DX3ND264N08pv'),
-            ('Techno Bunker', 'spotify:playlist:37i9dQZF1DX6J5NfMJS675'),
-            ('Shuffle Syndrome', 'spotify:playlist:37i9dQZF1DWUq3wF0JVtEy'),
-            ('Trance Mission', 'spotify:playlist:37i9dQZF1DX91oIci4su1D'),
-            ('Main Stage', 'spotify:playlist:37i9dQZF1DX7ZUug1ANKRP'),
-
-        ],
-    }
-    playlists_to_analyze = [
-        'spotify:playlist:37i9dQZF1DX0XUsuxWHRQd',
-        'spotify:playlist:37i9dQZF1DX1lVhptIYRda',
-        'spotify:playlist:37i9dQZF1DX9OZisIoJQhG',
-    ]
-
-    # for plist in playlists_to_analyze:
-    #     get_playlist_audio_features(plist)
-
-    data = None  # TODO: Better way than declaring prior to use?
     with open('playlists_to_work_with.json') as json_file:
-        data = json.load(json_file)
+        playlists_to_work_with = json.load(json_file)
 
-    for genre in data:
-        for playlist in plists_to_work_with[genre]:
+    for genre in playlists_to_work_with:
+        for playlist in playlists_to_work_with[genre]:
             get_playlist_audio_features(playlist[0], playlist[1], genre)
 
     # visualize_playlist_data(all_playlists['RapCaviar'])
