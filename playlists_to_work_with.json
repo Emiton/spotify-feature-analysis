@@ -22,7 +22,6 @@
       ["Drunk and Hungover", "spotify:playlist:37i9dQZF1DX3ph0alWhOXm"],
       ["Country Music 101: Country\"s Greatest Hits","spotify:playlist:37i9dQZF1DWZBCPUIUs2iR"],
       ["New Boots", "spotify:playlist:37i9dQZF1DX8S0uQvJ4gaa"]
-
   ],
   "pop": [
       ["Today\"s Top Hits", "spotify:playlist:37i9dQZF1DXcBWIGoYBM5M"],
@@ -35,7 +34,6 @@
       ["Women of Pop","spotify:playlist:37i9dQZF1DX3WvGXE8FqYX"],
       ["Bedroom Pop", "spotify:playlist:37i9dQZF1DXcxvFzl58uP7"],
       ["Fresh & Chill", "spotify:playlist:37i9dQZF1DX5CdVP4rz81C"]
-
   ],
   "rock": [
       ["Rock Classics", "spotify:playlist:37i9dQZF1DWXRqgorJj26U"],
@@ -48,7 +46,6 @@
       ["Pure Rock & Roll", "spotify:playlist:37i9dQZF1DWWRktbhJiuqL"],
       ["Rock Party", "spotify:playlist:37i9dQZF1DX8FwnYE6PRvL"],
       ["Emo Forever", "spotify:playlist:37i9dQZF1DX9wa6XirBPv8"]
-
   ],
   "r&b": [
       ["Are & Be", "spotify:playlist:37i9dQZF1DX4SBhb3fqCJd"],
@@ -61,7 +58,6 @@
       ["The Cookout", "spotify:playlist:37i9dQZF1DXab8DipvnuNU"],
       ["Fancy Friday", "spotify:playlist:37i9dQZF1DWUbo613Z2iWO"],
       ["Queen", "spotify:playlist:37i9dQZF1DWSIO2QWRavWZ"]
-
   ],
   "classical": [
       ["Classical Essentials", "spotify:playlist:37i9dQZF1DWWEJlAGA9gs0"],
@@ -87,6 +83,5 @@
       ["Shuffle Syndrome", "spotify:playlist:37i9dQZF1DWUq3wF0JVtEy"],
       ["Trance Mission", "spotify:playlist:37i9dQZF1DX91oIci4su1D"],
       ["Main Stage", "spotify:playlist:37i9dQZF1DX7ZUug1ANKRP"]
-
   ]
 }
