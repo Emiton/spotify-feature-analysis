@@ -1,4 +1,4 @@
-import json # TODO: Remove
+import json
 import matplotlib.pyplot as plt
 import numpy as np
 import os
@@ -21,30 +21,30 @@ all_playlists = {}
 # redirect_uri = 'http://localhost/5000'
 sp = spotipy.Spotify(client_credentials_manager=client_credentials_manager)
 
-# connection = sqlite3.connect('spotify_analysis_db')
-# cursor = connection.cursor()
-# query_string = (
-#     "CREATE TABLE spotify_songs ("
-#     "track_uri TEXT NOT NULL, "
-#     "name TEXT, "
-#     "genre TEXT, "
-#     "playlist TEXT, "
-#     "duration_ms INTEGER, "
-#     "key INTEGER, "
-#     "mode INTEGER, "
-#     "time_signature INTEGER, "
-#     "acousticness REAL, "
-#     "danceability REAL, "
-#     "energy REAL, "
-#     "instrumentalness REAL, "
-#     "liveness REAL, "
-#     "loudness REAL, "
-#     "speechiness REAL, "
-#     "tempo REAL, "
-#     "valence REAL, "
-#     " PRIMARY KEY (track_uri))"
-# )
-# cursor.execute('CREATE TABLE')
+connection = sqlite3.connect('spotify_analysis_db')
+cursor = connection.cursor()
+query_string = (
+    "CREATE TABLE spotify_songs ("
+    "track_uri TEXT NOT NULL, "
+    "name TEXT, "
+    "genre TEXT, "
+    "playlist TEXT, "
+    "duration_ms INTEGER, "
+    "key INTEGER, "
+    "mode INTEGER, "
+    "time_signature INTEGER, "
+    "acousticness REAL, "
+    "danceability REAL, "
+    "energy REAL, "
+    "instrumentalness REAL, "
+    "liveness REAL, "
+    "loudness REAL, "
+    "speechiness REAL, "
+    "tempo REAL, "
+    "valence REAL, "
+    " PRIMARY KEY (track_uri))"
+)
+# cursor.execute(query_string)
 
 
 def main():
@@ -52,8 +52,17 @@ def main():
         playlists_to_work_with = json.load(json_file)
 
     for genre in playlists_to_work_with:
-        for playlist in playlists_to_work_with[genre]:
-            get_playlist_audio_features(playlist[0], playlist[1], genre)
+        for plist in playlists_to_work_with[genre]:
+            get_playlist_audio_features(plist[0], plist[1], genre)
+
+    # get_playlist_audio_features(
+    #     playlists_to_work_with['Hip-Hop'][0][0],
+    #     playlists_to_work_with['Hip-Hop'][0][1],
+    #     'Hip-Hop'
+    # )
+
+    cursor.close()
+    connection.close()
 
     # visualize_playlist_data(all_playlists['RapCaviar'])
 
@@ -187,6 +196,39 @@ def get_playlist_audio_features(playlist, uri, genre):
                 all_playlists[playlist_name]['speechiness'].append(features[0]['speechiness'])
                 all_playlists[playlist_name]['tempo'].append(features[0]['tempo'])
                 all_playlists[playlist_name]['valence'].append(features[0]['valence'])
+
+                query = (
+                    "INSERT OR REPLACE INTO spotify_songs ("
+                    "track_uri, name, genre, playlist, duration_ms, key, mode, time_signature, "
+                    "acousticness, danceability, energy, instrumentalness, liveness, loudness, speechiness, "
+                    "tempo, valence) "
+                    "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
+                )
+
+                cursor.execute(
+                    query,
+                    (
+                        track_uri,
+                        name,
+                        genre,
+                        playlist,
+                        features[0]['duration_ms'],
+                        features[0]['key'],
+                        features[0]['mode'],
+                        features[0]['time_signature'],
+                        features[0]['acousticness'],
+                        features[0]['danceability'],
+                        features[0]['energy'],
+                        features[0]['instrumentalness'],
+                        features[0]['liveness'],
+                        features[0]['loudness'],
+                        5.0,
+                        features[0]['tempo'],
+                        features[0]['valence']
+                    )
+                )
+
+                connection.commit()
 
     return results
 
