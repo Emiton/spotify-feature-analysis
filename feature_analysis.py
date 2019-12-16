@@ -5,9 +5,16 @@ import seaborn as sns
 import sqlite3
 
 
+## Grab a given feature, but only a certain genre
+# hip_energy = df['energy'][df['genre'] == 'Hip-Hop']
+
+## Get unique values
+# print(df.playlist.unique())
+
+
 """
 TODO
-
+Feature Selection
 
 
 
@@ -35,31 +42,70 @@ rows = cursor.fetchall()
 # Create Dataframe
 df = pd.read_sql_query(get_all_query, connection)
 
-# print(df.playlist.unique())
 
-# Create figures of feature with dist per genre
-for i in range(len(features) - 1):
-    plt.figure(i + 1)
 
-    for genre in genres:
-        genre_type = df[features[i]][df['genre'] == genre]
-        sns.distplot(genre_type, hist=False, kde=True, kde_kws={'linewidth': 3}, label=genre)
+def features_dist_by_genre():
+    """
+    Create figures of feature with distribution by genre
+    """
+    for i in range(len(features)):
+        plt.figure(i + 1)
 
-    plt.title(f'{features[i]} by Genre')
-    plt.xlabel(features[i])
+        for genre in genres:
+            genre_data = df[features[i]][df['genre'] == genre]
+            sns.distplot(genre_data, hist=False, kde=True, kde_kws={'linewidth': 3}, label=genre)
+
+        plt.title(f'{features[i]} by Genre')
+        plt.xlabel(features[i])
+        plt.show()
+        # plt.savefig(f'./figures/{features[i]}_by_genre', bbox_inches='tight')
+
+
+def correlation_matrix_by_genre():
+    """
+    Create a feature correlation matrix for each genre
+    """
+    for i in range(len(genres)):
+        plt.figure(i + 1)
+        plt.figure(figsize=(12, 10))
+        genre_data = df[df['genre'] == genres[i]]
+        correlation = genre_data.corr()
+        sns.heatmap(correlation, annot=True, cmap=plt.cm.Reds)
+        plt.title(f'Correlation Matrix: {genres[i]}')
+        plt.show()
+
+
+# correlation_matrix_by_genre()
+
+genre_default_values = {
+    'Hip-Hop': 1,
+    'country': 2,
+    'pop': 3,
+    'rock': 4,
+    'r&b': 5,
+    'classical': 6,
+    'electronic': 7
+}
+
+
+def feature_importance():
+    """
+    Use tree model to determine feature importance
+    """
+    df['new_genre'] = -1
+    for i in range(len(genres)):
+        df.loc[df['genre'] == genres[i], 'new_genre'] = genre_default_values[genres[i]]
+
+    y = df.iloc[:, 17]
+    x = df.iloc[:, 5:16]
+    from sklearn.ensemble import ExtraTreesClassifier
+    model = ExtraTreesClassifier()
+    model.fit(x, y)
+    print(model.feature_importances_)
+    feat_importances = pd.Series(model.feature_importances_, index=x.columns)
+    feat_importances.nlargest(10).plot(kind='barh')
     plt.show()
-    plt.savefig(f'./figures/{features[i]}_by_genre', bbox_inches='tight')
-
-# Grab a given feature, but only a certain genre
-# hip_energy = df['energy'][df['genre'] == 'Hip-Hop']
 
 
-
-"""
-Compute per playlist for a feature by genre
-    
-    Get column
-    Determine all possible values for column
-    use values to do same calculation but for playlist
-"""
+feature_importance()
 
