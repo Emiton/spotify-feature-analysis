@@ -24,7 +24,7 @@ sp = spotipy.Spotify(client_credentials_manager=client_credentials_manager)
 connection = sqlite3.connect('spotify_analysis_db')
 cursor = connection.cursor()
 query_string = (
-    "CREATE TABLE spotify_songs ("
+    "CREATE TABLE IF NOT EXISTS spotify_songs ("
     "track_uri TEXT NOT NULL, "
     "name TEXT, "
     "genre TEXT, "
@@ -44,7 +44,7 @@ query_string = (
     "valence REAL, "
     " PRIMARY KEY (track_uri))"
 )
-# cursor.execute(query_string)
+cursor.execute(query_string)
 
 
 def main():
@@ -71,7 +71,7 @@ def main():
         print("–" * 70)
         print(playlist1)
         for feature in all_playlists[playlist1]:
-            if feature != 'name' and feature != 'track uri':
+            if feature != 'name' and feature != 'track uri' and feature != 'playlist' and feature != 'genre' and feature != 'track uri':
                 print(feature.upper(),
                       "| median:", np.median(all_playlists[playlist1][feature]),
                       "| mean:", np.mean(all_playlists[playlist1][feature]))
@@ -222,7 +222,7 @@ def get_playlist_audio_features(playlist, uri, genre):
                         features[0]['instrumentalness'],
                         features[0]['liveness'],
                         features[0]['loudness'],
-                        5.0,
+                        features[0]['speechiness'],
                         features[0]['tempo'],
                         features[0]['valence']
                     )
