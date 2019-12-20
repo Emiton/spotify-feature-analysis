@@ -61,6 +61,9 @@ def features_dist_by_genre():
         # plt.savefig(f'./figures/{features[i]}_by_genre', bbox_inches='tight')
 
 
+# features_dist_by_genre()
+
+
 def correlation_matrix_by_genre():
     """
     Create a feature correlation matrix for each genre
@@ -77,22 +80,26 @@ def correlation_matrix_by_genre():
 
 # correlation_matrix_by_genre()
 
-genre_default_values = {
-    'Hip-Hop': 1,
-    'country': 2,
-    'pop': 3,
-    'rock': 4,
-    'r&b': 5,
-    'classical': 6,
-    'electronic': 7
-}
+
 
 
 def feature_importance():
     """
     Use tree model to determine feature importance
     """
-    df['new_genre'] = -1
+
+    genre_default_values = {
+        'Hip-Hop': 1,
+        'country': 2,
+        'pop': 3,
+        'rock': 4,
+        'r&b': 5,
+        'classical': 6,
+        'electronic': 7
+    }
+
+    df['new_genre'] = -1 # new column used to convert genres to numerical values
+
     for i in range(len(genres)):
         df.loc[df['genre'] == genres[i], 'new_genre'] = genre_default_values[genres[i]]
 
@@ -104,6 +111,7 @@ def feature_importance():
     print(model.feature_importances_)
     feat_importances = pd.Series(model.feature_importances_, index=x.columns)
     feat_importances.nlargest(10).plot(kind='barh')
+    plt.title('Feature Importance')
     plt.show()
 
 
