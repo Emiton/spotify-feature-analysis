@@ -83,5 +83,29 @@
       ["Shuffle Syndrome", "spotify:playlist:37i9dQZF1DWUq3wF0JVtEy"],
       ["Trance Mission", "spotify:playlist:37i9dQZF1DX91oIci4su1D"],
       ["Main Stage", "spotify:playlist:37i9dQZF1DX7ZUug1ANKRP"]
+  ],
+  "jazz": [
+      ["Coffee Table Jazz", "spotify:playlist:37i9dQZF1DWVqfgj8NZEp1"],
+      ["Late Night Jazz", "spotify:playlist:37i9dQZF1DX4wta20PHgwo"],
+      ["Jazz Classics", "spotify:playlist:37i9dQZF1DXbITWG1ZJKYt"],
+      ["Chilled Jazz", "spotify:playlist:37i9dQZF1DX2vYju3i0lNX"],
+      ["Smooth Jazz", "spotify:playlist:37i9dQZF1DXdwTUxmGKrdN"],
+      ["Good Morning Jazz", "spotify:playlist:37i9dQZF1DX71VcjjnyaBQ"],
+      ["State of Jazz", "spotify:playlist:37i9dQZF1DX7YCknf2jT6s"],
+      ["Women of Jazz", "spotify:playlist:37i9dQZF1DX5OepaGriAIm"],
+      ["Big Band", "spotify:playlist:37i9dQZF1DX6G7arXBXa3A"],
+      ["Lazy Jazz Cat", "spotify:playlist:37i9dQZF1DWTcEjayzrZ4x"]
+  ],
+  "reggae": [
+      ["Reggae Classics", "spotify:playlist:37i9dQZF1DXbSbnqxMTGx9"],
+      ["One Love", "spotify:playlist:37i9dQZF1DWSiyIBdVQrkk"],
+      ["Dancehall Official", "spotify:playlist:37i9dQZF1DXan38dNVDdl4"],
+      ["Dancehall King", "spotify:playlist:37i9dQZF1DWWDLvD3P5wOG"],
+      ["Chilled Reggae", "spotify:playlist:37i9dQZF1DWYtKpmml7moA"],
+      ["Island Reggae", "spotify:playlist:37i9dQZF1DX3mvx0imueXo"],
+      ["Techno Bunker", "spotify:playlist:37i9dQZF1DX6J5NfMJS675"],
+      ["Massive Soca Hits", "spotify:playlist:37i9dQZF1DWW7BONj8RiqI"],
+      ["Vintage Vibes: Sunny Reggae", "spotify:playlist:37i9dQZF1DWWgsG1xGbDd1"],
+      ["Legendary Labels: Tuff Gong", "spotify:playlist:37i9dQZF1DX38neNCcDGwC"]
   ]
 }
