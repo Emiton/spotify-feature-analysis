@@ -3,11 +3,6 @@ import sqlite3
 from sklearn.preprocessing import RobustScaler
 
 
-"""
-Connect to DB
-Read in all data
-
-"""
 connection = sqlite3.connect('spotify_analysis_db')
 cursor = connection.cursor()
 
