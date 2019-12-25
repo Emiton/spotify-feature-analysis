@@ -5,30 +5,10 @@ import seaborn as sns
 import sqlite3
 
 
-## Grab a given feature, but only a certain genre
-# hip_energy = df['energy'][df['genre'] == 'Hip-Hop']
-
-## Get unique values
-# print(df.playlist.unique())
-
-
-"""
-TODO
-Feature Selection
-
-
-
-DONE 
-    Get all data from sqlite DB
-    Create DataFrame
-    Create feature distributions for each genre on same chart
-"""
-
-
 connection = sqlite3.connect('spotify_analysis_db')
 cursor = connection.cursor()
 
-genres = ['Hip-Hop', 'country', 'pop', 'rock', 'r&b', 'classical', 'electronic']
+genres = ['Hip-Hop', 'country', 'pop', 'rock', 'r&b', 'classical', 'electronic', 'jazz', 'reggae']
 features = [
     'duration_ms', 'key', 'mode', 'time_signature', 'acousticness',
     'danceability', 'energy', 'instrumentalness', 'liveness', 'loudness', 'speechiness', 'tempo', 'valence'
@@ -61,7 +41,7 @@ def features_dist_by_genre():
         # plt.savefig(f'./figures/{features[i]}_by_genre', bbox_inches='tight')
 
 
-# features_dist_by_genre()
+features_dist_by_genre()
 
 
 def correlation_matrix_by_genre():
@@ -78,9 +58,7 @@ def correlation_matrix_by_genre():
         plt.show()
 
 
-# correlation_matrix_by_genre()
-
-
+correlation_matrix_by_genre()
 
 
 def feature_importance():
@@ -95,7 +73,9 @@ def feature_importance():
         'rock': 4,
         'r&b': 5,
         'classical': 6,
-        'electronic': 7
+        'electronic': 7,
+        'jazz': 8,
+        'reggae': 9
     }
 
     df['new_genre'] = -1 # new column used to convert genres to numerical values
