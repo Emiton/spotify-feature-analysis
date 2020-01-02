@@ -1,0 +1,4 @@
+# Spotify Feature Analysis
+
+## Purpose
+With the increasing need for the commercialization of recommendation systems, there is a growing importance for the ability to classify commercial data. In the music space, genre classification can serve as a useful step in classifying and recommending music to users. In this project I experiment with the Clustering Using Representatives algorithm (CURE) to cluster and classify the genre of songs. The Spotify API was used to aggregate contemporary music. The data was then analyzed to see which features were most impactful in classification. The project focuses on seven main genres including hip-hop, pop, rock, jazz, classical, electronic, and reggae.  
