@@ -3,7 +3,6 @@ import matplotlib.pyplot as plt
 import numpy as np
 import os
 import pandas as pd
-import seaborn as sns
 import spotipy
 from spotipy.oauth2 import SpotifyClientCredentials  # For Spotify API use
 import sqlite3
@@ -17,7 +16,7 @@ client_credentials_manager = SpotifyClientCredentials(
 )
 all_playlists = {}
 
-# TODO: See if redirect is necessary
+# Might need redirect if trouble hosting locally
 # redirect_uri = 'http://localhost/5000'
 sp = spotipy.Spotify(client_credentials_manager=client_credentials_manager)
 
@@ -55,16 +54,8 @@ def main():
         for plist in playlists_to_work_with[genre]:
             get_playlist_audio_features(plist[0], plist[1], genre)
 
-    # get_playlist_audio_features(
-    #     playlists_to_work_with['Hip-Hop'][0][0],
-    #     playlists_to_work_with['Hip-Hop'][0][1],
-    #     'Hip-Hop'
-    # )
-
     cursor.close()
     connection.close()
-
-    # visualize_playlist_data(all_playlists['RapCaviar'])
 
     # manually inspect all of the values to determine whether the median or mean is a better metric to plot
     for playlist1 in all_playlists:
@@ -106,7 +97,7 @@ def main():
     add_to_radar('Hot Country', 'green')
     add_to_radar('Morning Classical', 'blue')
 
-    # polar coordinates math stuff
+    # polar coordinates math for radar graph
     ax.set_theta_offset(np.pi / 2)
     ax.set_theta_direction(-1)
 
@@ -133,7 +124,7 @@ def main():
     ax.spines['polar'].set_color('#222222')  # color of outermost gridline (spine)
     ax.set_facecolor('#FAFAFA')  # background color inside the circle itself
 
-    # Lastly, give the chart a title and a legend
+    # Give the chart a title and a legend
     ax.set_title('Playlist Comparison', y=1.08)
     ax.legend(loc='upper right', bbox_to_anchor=(1.1, 1.1))
 
@@ -171,7 +162,7 @@ def get_playlist_audio_features(playlist, uri, genre):
         # print(json.dumps(track, indent=4))
 
         if track_metadata['track'] is not None:
-            # save metadata stuff
+            # save metadata
             name = track_metadata['track']['name']
             print(name)
             track_uri = track_metadata['track']['uri']
@@ -234,24 +225,9 @@ def get_playlist_audio_features(playlist, uri, genre):
 
 
 def visualize_playlist_data(playlist):
-    # create dataframe
     df = pd.DataFrame.from_dict(playlist) # wont work if name and track_uri are in df
-    fig = plt.figure()
-
-    # sns.distplot(df['acousticness'], hist='true', kde='false', bins=25)
-    # sns.distplot(df['danceability'], hist='true', kde='false', bins=25)
-    # sns.distplot(df['energy'], hist='true', kde='false', bins=25)
-    # sns.distplot(df['instrumentalness'], hist='true', kde='false', bins=25)
-    # sns.distplot(df['liveness'], hist='true', kde='false', bins=25)
-    # sns.distplot(df['loudness'], hist='true', kde='false', bins=25)
-    # sns.distplot(df['speechiness'], hist='true', kde='false', bins=25)
-    # sns.distplot(df['tempo'], hist='true', kde='false', bins=25)
-    # sns.distplot(df['valence'], hist='true', kde='false', bins=25)
-
     df.boxplot()
-
     plt.show()
-    return ""
 
 
 if __name__ == '__main__':

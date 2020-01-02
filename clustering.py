@@ -1,6 +1,5 @@
 from itertools import combinations
 from pyclustering.cluster import cluster_visualizer
-from pyclustering.cluster import cluster_visualizer_multidim
 from pyclustering.cluster.cure import cure
 import statistics as stats
 import sqlite3
@@ -10,7 +9,6 @@ def cluster_data(data, cluster_size):
     cure_instance = cure(data, cluster_size)
     cure_instance.process()
     clusters = cure_instance.get_clusters()
-    # print(f'CLUSTERS:\n{clusters}')
     return clusters
 
 
@@ -64,9 +62,6 @@ def cluster_statistics(cluster_genre_count):
     mean = stats.mean(percentages)
     median = stats.median(percentages)
     stdev = stats.stdev(percentages)
-    # print(f'MEAN: {mean}')
-    # print(f'MEDIAN: {median}')
-    # print(f'STD DEV: {stdev}')
 
     return mean, median, stdev
 
@@ -92,7 +87,6 @@ for row in rows:
     input_data.append(feature_values)
 
 groups = cluster_data(input_data, 75)
-# visualize_clusters(groups, input_data)
 
 
 def cluster_all_possible_combinations(feature_set_count, cluster_size):
@@ -105,7 +99,6 @@ def cluster_all_possible_combinations(feature_set_count, cluster_size):
     average_median = []
     average_stdev = []
     for combo in possible_combinations:
-        # print(f'COMBO: {combo}')
 
         # Create reduced data set
         curr_data = []
@@ -142,8 +135,6 @@ def cluster_all_possible_combinations(feature_set_count, cluster_size):
     print(f'\tAverage median: {stats.mean(average_median)}')
     print(f'\tAverage standard deviation: {stats.mean(average_stdev)}')
 
-
-# cluster_all_possible_combinations(2, 25)
 
 cluster_sizes = [7, 25, 75, 100, 150, 200, 250]
 

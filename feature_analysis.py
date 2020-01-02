@@ -1,5 +1,4 @@
 import matplotlib.pyplot as plt
-import numpy as np
 import pandas as pd
 import seaborn as sns
 import sqlite3
@@ -14,6 +13,7 @@ features = [
     'danceability', 'energy', 'instrumentalness', 'liveness', 'loudness', 'speechiness', 'tempo', 'valence'
 ]
 
+
 # DB connect and fetch
 get_all_query = "SELECT * from spotify_songs"
 cursor.execute(get_all_query)
@@ -21,7 +21,6 @@ rows = cursor.fetchall()
 
 # Create Dataframe
 df = pd.read_sql_query(get_all_query, connection)
-
 
 
 def features_dist_by_genre():
